@@ -6,4 +6,6 @@ module.exports = {
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
   serverModuleFormat: "cjs",
+  postcss: true,
+  tailwind: true,
 };

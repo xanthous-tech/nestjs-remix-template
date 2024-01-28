@@ -17,7 +17,7 @@ export default function Index() {
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>{data.message} Welcome to Remix with NestJS!</h1>
+      <h1 className="text-3xl font-bold underline">{data.message} Welcome to Remix with NestJS!</h1>
       <ul>
         <li>
           <a

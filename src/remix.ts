@@ -30,15 +30,20 @@ export function injectRemixIntoNest(
   expressApp.use(express.static('public', { maxAge: '1h' }));
 
   // Check if the server is running in development mode and use the devBuild to reflect realtime changes in the codebase.
-  expressApp.all(
-    '*',
+  expressApp.all('*', (req, res, next) => {
+    // excluding this path to let bull-board handle it
+    if (req.originalUrl.startsWith('/ctrls')) {
+      next();
+      return;
+    }
+
     createRequestHandler({
       build,
       mode: build.mode,
       // getLoadContext can take in express req and res, use if needed
       getLoadContext: () => apploadContext,
-    }),
-  );
+    })(req, res, next);
+  });
 
   return build;
 }

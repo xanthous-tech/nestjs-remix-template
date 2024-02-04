@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
+import { AuthModule } from './modules/auth';
+import { QueuesModule } from './modules/queues';
 import appConfig from './app.config';
 import { AppService } from './app.service';
-import { QueuesModule } from './modules/queues';
 
 const ENV = process.env.NODE_ENV;
 
@@ -14,6 +15,7 @@ const ENV = process.env.NODE_ENV;
       envFilePath: ['.env', `.env.${ENV}`, `.env.${ENV}.local`, '.env.local'],
       load: [appConfig],
     }),
+    AuthModule,
     QueuesModule,
   ],
   controllers: [],

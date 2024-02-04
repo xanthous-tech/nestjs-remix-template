@@ -1,48 +1,54 @@
 import { json, type LoaderFunction, type MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
+import { validateSession } from '~/lib/session.server';
+
 export const meta: MetaFunction = () => {
   return [
-    { title: 'New Remix App' },
+    { title: 'New NestJS-Remix App' },
     { name: 'description', content: 'Welcome to Remix!' },
   ];
 };
 
-export const loader: LoaderFunction = ({ context }) => {
-  return json({ message: context.appService.getHello() });
+export const loader: LoaderFunction = async (args) => {
+  const payload = await validateSession(args);
+  const headers = {};
+  if (payload.sessionCookie) {
+    headers['Set-Cookie'] = payload.sessionCookie.serialize();
+  }
+
+  const { context } = args;
+
+  return json(
+    {
+      message: context.appService.getHello(),
+      user: payload.user,
+    },
+    {
+      headers,
+    },
+  );
 };
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1 className="text-3xl font-bold underline">{data.message} Welcome to Remix with NestJS!</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="m-4">
+      <h2 className="text-xl font-bold my-2">NestJS Remix Template</h2>
+      <p>{data.message}</p>
+      <p>
+        This is the UI for managing various tedious finance functions of X-Tech.
+      </p>
+      <p>
+        You are logged in as{' '}
+        {data.user?.githubUsername}.
+      </p>
+      <p>
+        <a href="/signout" className="underline">
+          Sign out here
+        </a>
+      </p>
     </div>
   );
 }

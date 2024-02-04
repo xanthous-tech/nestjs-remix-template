@@ -5,13 +5,15 @@ import type { Express } from 'express';
 import type { AppLoadContext } from '@remix-run/server-runtime';
 
 import type { AppService } from './app.service';
+import { AuthService } from './modules/auth';
 
-const BUILD_DIR = path.join(process.cwd(), 'build');
-export const build = require(BUILD_DIR);
+const BUILD_DIR = path.join(process.cwd(), 'build', 'index.js');
+export const build = await import(BUILD_DIR);
 
 declare module '@remix-run/server-runtime' {
   export interface AppLoadContext {
     appService: AppService;
+    authService: AuthService;
   }
 }
 
@@ -33,6 +35,12 @@ export function injectRemixIntoNest(
   expressApp.all('*', (req, res, next) => {
     // excluding this path to let bull-board handle it
     if (req.originalUrl.startsWith('/ctrls')) {
+      next();
+      return;
+    }
+
+    // exclude controller paths from the nestjs server
+    if (req.originalUrl.startsWith('/api')) {
       next();
       return;
     }

@@ -15,8 +15,7 @@ On the Remix side, we added the following toolchain / UI libraries:
 
 Between these two, we have injected `AppService` into the Remix app load context, so you can use it in the loaders and actions. Feel free to use this as a starting point for your own projects.
 
-We plan to add more functionalities to this template in the future, such as:
-- [ ] Drizzle ORM
-- [ ] Lucia Auth
-- [ ] BullMQ (with Bull Board)
-
+We also added these functional pieces to speed up development of various projects:
+- [x] Drizzle ORM
+- [x] Lucia Auth
+- [x] BullMQ (with Bull Board)

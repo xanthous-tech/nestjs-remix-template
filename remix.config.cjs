@@ -5,7 +5,7 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
-  serverModuleFormat: "cjs",
+  serverModuleFormat: "esm",
   postcss: true,
   tailwind: true,
 };

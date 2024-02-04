@@ -19,7 +19,16 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "noUnusedTemplateLiteral": "warn"
+      },
+      "complexity": {
+        "useLiteralKeys": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
+      }
     }
   }
 }

@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1706971259411,
+      "tag": "0000_amazing_jigsaw",
+      "breakpoints": true
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import {
 } from '@remix-run/react';
 
 import stylesheet from '~/tailwind.css';
+import { SiteHeader } from '~/components/site-header';
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -26,6 +27,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <SiteHeader />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

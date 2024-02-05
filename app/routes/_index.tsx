@@ -1,5 +1,6 @@
 import { json, type LoaderFunction, type MetaFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useLocation, useNavigate } from '@remix-run/react';
+import { useEffect } from 'react';
 
 import { validateSession } from '~/lib/session.server';
 
@@ -32,6 +33,14 @@ export const loader: LoaderFunction = async (args) => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!data.user) {
+      navigate(`/signin?callbackUrl=${location.pathname}`);
+    }
+  }, [data, navigate, location.pathname]);
 
   return (
     <div className="m-4">

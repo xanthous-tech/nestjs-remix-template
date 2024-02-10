@@ -6,8 +6,8 @@ import { GitHubIcon } from '~/components/icons/github';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Sign into X-Accountant' },
-    { name: 'description', content: 'Automated Accountant' },
+    { title: 'Sign in' },
+    { name: 'description', content: 'Sign into the app' },
   ];
 };
 

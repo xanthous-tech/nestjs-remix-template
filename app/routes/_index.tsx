@@ -47,7 +47,7 @@ export default function Index() {
       <h2 className="text-xl font-bold my-2">NestJS Remix Template</h2>
       <p>{data.message}</p>
       <p>
-        This is the UI for managing various tedious finance functions of X-Tech.
+        This is the UI. The above message is passed down from NestJS service via Remix loader.
       </p>
       <p>
         You are logged in as{' '}
